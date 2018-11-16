@@ -8,7 +8,7 @@ const extractKey = path(['meta', 'url']);
 export default (state, action) => {
   const collection = extract(action);
 
-  if (!collection || !collection instanceof Array) {
+  if (!collection || !Array.isArray(collection)) {
     return state;
   }
 

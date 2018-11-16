@@ -7,7 +7,7 @@ const comment = new schema.Entity('comment');
 const normalizr = (entityName, schema) =>
   compose(
     normalized => {
-      if (!normalized.result || !normalized.result instanceof Array) {
+      if (!normalized.result || !Array.isArray(normalized.result)) {
         return normalized;
       }
 
@@ -26,6 +26,11 @@ export const RESOURCES_MAP = {
     url: '/posts',
     cache: true,
     transform: normalizr('post', [post]),
+  },
+  post: {
+    url: '/posts/{id}',
+    cache: true,
+    transform: normalizr('post', post),
   },
   comments: {
     url: '/comments',
