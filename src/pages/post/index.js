@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { path } from 'ramda';
+import { path, prop } from 'ramda';
 import { Link } from 'react-router-dom';
 
 import { mapDispatchToProps } from '../../store/actions/call-api';
 import { selectMeta, selectEntity } from '../../store/selectors';
 
+import CommentsList from '../../components/comments-list';
 import Loader from '../../components/loader';
 import mapState from '../../utils/map-state';
+
+import PostCommentsProvider from '../../providers/post-comments';
 
 import classNames from './styles.module.css';
 
@@ -25,9 +28,14 @@ function Post(post) {
 }
 
 function PostPage({ callAPI, meta, post, ...props }) {
-  useEffect(() => {
-    callAPI('post', { id: extractId(props) });
-  }, []);
+  const postId = extractId(props);
+
+  useEffect(
+    () => {
+      callAPI('post', { id: postId });
+    },
+    [postId]
+  );
 
   return (
     <div className="page">
@@ -38,6 +46,7 @@ function PostPage({ callAPI, meta, post, ...props }) {
       {!!meta.error && <p>Error: {meta.error.status}</p>}
       {meta.fetching && !post && <Loader />}
       <Post {...post} />
+      <PostCommentsProvider postId={postId} render={CommentsList} />
     </div>
   );
 }
