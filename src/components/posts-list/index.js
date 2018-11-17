@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
-export default function PostsList({ posts, limit = 5 }) {
+import Post from '../mini-post';
+
+export default function PostsList({ posts, counter = false, limit = 5 }) {
   const [offset, setOffset] = useState(limit);
 
   const handleShowMore = () => setOffset(prevOffset => prevOffset + limit);
@@ -9,14 +10,7 @@ export default function PostsList({ posts, limit = 5 }) {
   return (
     <React.Fragment>
       {posts.slice(0, offset).map(post => (
-        <React.Fragment key={post.id}>
-          <h3>
-            <Link to={`/post/${post.id}`}>{post.title}</Link>
-          </h3>
-
-          <p>{post.body}</p>
-          <hr />
-        </React.Fragment>
+        <Post {...post} key={post.id} counter={counter} />
       ))}
       {offset < posts.length && (
         <button onClick={handleShowMore}>

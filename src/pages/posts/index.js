@@ -8,9 +8,11 @@ import { selectMeta, selectExpandedCollection } from '../../store/selectors';
 import Loader from '../../components/loader';
 import PostsList from '../../components/posts-list';
 
-function PostsPage({ callAPI, meta, posts }) {
+function PostsPage({ callAPI, meta, metaComments, posts }) {
   useEffect(() => {
     callAPI('posts');
+    // Fetch all comments for counter
+    callAPI('comments');
   }, []);
 
   return (
@@ -19,7 +21,9 @@ function PostsPage({ callAPI, meta, posts }) {
 
       {meta.fetching && <Loader msg={'Fetching posts'} />}
       {!!meta.error && <p>Error: {meta.error.status}</p>}
-      {meta.fetched && <PostsList posts={posts} />}
+      {meta.fetched && (
+        <PostsList posts={posts} counter={metaComments.fetched} />
+      )}
     </div>
   );
 }
@@ -28,6 +32,7 @@ export default connect(
   mapState({
     posts: selectExpandedCollection('posts'),
     meta: selectMeta('posts'),
+    metaComments: selectMeta('comments'),
   }),
   mapDispatchToProps
 )(PostsPage);
