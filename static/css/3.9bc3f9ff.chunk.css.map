@@ -1,1 +1,0 @@
-{"version":3,"sources":["/Users/mmorozov/7tv/test/src/pages/post/styles.module.css"],"names":[],"mappings":"AAAA,oBACE,qBAAsB,AACtB,cAAe,AACf,cAAgB,CACjB,AAED,oBACE,eAAiB,CAClB","file":"3.9bc3f9ff.chunk.css","sourcesContent":[".back {\n  text-decoration: none;\n  color: #2a1e5c;\n  font-size: 16px;\n}\n\n.post {\n  margin-top: 20px;\n}\n"]}
