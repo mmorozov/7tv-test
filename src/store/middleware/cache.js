@@ -14,4 +14,10 @@ export const infiniteCache = (state, url, params) => {
   );
 };
 
-export default cache => (cache ? infiniteCache : fetchingCache);
+export default cache => {
+  if (typeof cache === 'function') {
+    return cache;
+  }
+
+  return cache ? infiniteCache : fetchingCache;
+};

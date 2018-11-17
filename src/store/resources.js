@@ -1,4 +1,4 @@
-import { pathOr, flip, compose } from 'ramda';
+import { pathOr, flip, compose, has } from 'ramda';
 import { normalize, schema } from 'normalizr';
 
 const post = new schema.Entity('post');
@@ -30,7 +30,11 @@ export const RESOURCES_MAP = {
   },
   post: {
     url: '/posts/{id}',
-    cache: true,
+    cache: (state, _, { id }) =>
+      compose(
+        has(id),
+        pathOr({}, ['entities', 'post'])
+      )(state),
     transform: normalizr('post', post),
   },
   user: {
