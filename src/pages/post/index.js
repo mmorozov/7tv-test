@@ -9,7 +9,9 @@ import { selectMeta, selectEntity } from '../../store/selectors';
 import CommentsList from '../../components/comments-list';
 import Loader from '../../components/loader';
 import Author from '../../components/author';
+
 import mapState from '../../utils/map-state';
+import { useDocumentTitle } from '../../utils/set-document-title';
 
 import UserProvider from '../../providers/user';
 import PostCommentsProvider from '../../providers/post-comments';
@@ -49,6 +51,8 @@ function PostPage({ callAPI, meta, post, ...props }) {
     },
     [postId]
   );
+
+  useDocumentTitle(prop('title', post));
 
   return (
     <div className="page">
