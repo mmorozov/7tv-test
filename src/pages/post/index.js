@@ -8,8 +8,10 @@ import { selectMeta, selectEntity } from '../../store/selectors';
 
 import CommentsList from '../../components/comments-list';
 import Loader from '../../components/loader';
+import Author from '../../components/author';
 import mapState from '../../utils/map-state';
 
+import UserProvider from '../../providers/user';
 import PostCommentsProvider from '../../providers/post-comments';
 
 import classNames from './styles.module.css';
@@ -26,6 +28,17 @@ function Post(post) {
     </div>
   );
 }
+
+const authorRenderer = ({ user: author }) => {
+  if (!author) return null;
+
+  return (
+    <>
+      <h3>Author</h3>
+      <Author {...author} />
+    </>
+  );
+};
 
 function PostPage({ callAPI, meta, post, ...props }) {
   const postId = extractId(props);
@@ -46,6 +59,9 @@ function PostPage({ callAPI, meta, post, ...props }) {
       {!!meta.error && <p>Error: {meta.error.status}</p>}
       {meta.fetching && !post && <Loader />}
       <Post {...post} />
+      {!!post && (
+        <UserProvider id={prop('userId', post)} render={authorRenderer} />
+      )}
       <PostCommentsProvider postId={postId} render={CommentsList} />
     </div>
   );

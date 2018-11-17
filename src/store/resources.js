@@ -2,6 +2,7 @@ import { pathOr, flip, compose } from 'ramda';
 import { normalize, schema } from 'normalizr';
 
 const post = new schema.Entity('post');
+const user = new schema.Entity('user');
 const comment = new schema.Entity('comment');
 
 const normalizr = (entityName, schema) =>
@@ -31,6 +32,11 @@ export const RESOURCES_MAP = {
     url: '/posts/{id}',
     cache: true,
     transform: normalizr('post', post),
+  },
+  user: {
+    url: '/users/{id}',
+    cache: true,
+    transform: normalizr('user', user),
   },
   comments: {
     url: '/comments',
