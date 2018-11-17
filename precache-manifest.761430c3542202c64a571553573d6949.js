@@ -4,12 +4,12 @@ self.__precacheManifest = [
     "url": "/7tv-test/static/js/0.e747fd19.chunk.js"
   },
   {
-    "revision": "08c13ab9d74fb4d76ff8",
+    "revision": "f665c2268a340857f4d3",
     "url": "/7tv-test/static/css/main.22486c77.chunk.css"
   },
   {
-    "revision": "08c13ab9d74fb4d76ff8",
-    "url": "/7tv-test/static/js/main.08c13ab9.chunk.js"
+    "revision": "f665c2268a340857f4d3",
+    "url": "/7tv-test/static/js/main.f665c226.chunk.js"
   },
   {
     "revision": "f29bd6a2ccee94990d8b",
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/7tv-test/static/js/runtime~main.1c9c3df2.js"
   },
   {
-    "revision": "d095a387b848d0c9490a02a405deeb61",
+    "revision": "01afe9749d26c95fc2be654297d19123",
     "url": "/7tv-test/index.html"
   }
 ];
