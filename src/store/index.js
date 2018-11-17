@@ -9,7 +9,7 @@ export default apiHost =>
     reducers(),
     applyMiddleware(
       createLogger({
-        predicate: () => process.env.NODE_ENV !== 'test',
+        predicate: () => process.env.NODE_ENV === 'development',
       }),
       createAPIMiddleWare(apiHost)
     )

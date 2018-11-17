@@ -12,11 +12,14 @@ const Post = lazy(() => import('../pages/post'));
 // API Host can be changed (in abstract future) via ENV
 const store = createStore('https://jsonplaceholder.typicode.com');
 
+// Useful for deploy to github
+const BASE_PATH = process.env.PUBLIC_URL || undefined;
+
 export default function App() {
   return (
     <div className={classNames.container}>
       <Provider store={store}>
-        <Router>
+        <Router basename={BASE_PATH}>
           <Switch>
             <Route path="/" exact component={withLoader(Posts)} />
             <Route path="/post/:id" exact component={withLoader(Post)} />
